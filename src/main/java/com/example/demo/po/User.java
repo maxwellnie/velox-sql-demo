@@ -1,9 +1,8 @@
 package com.example.demo.po;
 
-import com.maxwellnie.velox.sql.core.annotation.Column;
-import com.maxwellnie.velox.sql.core.annotation.Entity;
-import com.maxwellnie.velox.sql.core.annotation.PrimaryKey;
-import com.maxwellnie.velox.sql.core.manager.KeyStrategyManager;
+import com.maxwellnie.velox.sql.core.annotation.*;
+import com.maxwellnie.velox.sql.core.natives.enums.JoinType;
+import com.maxwellnie.velox.sql.core.natives.jdbc.table.primary.KeyStrategyManager;
 import com.maxwellnie.velox.sql.core.natives.type.convertor.impl.IntegerConvertor;
 import lombok.Getter;
 import lombok.Setter;
@@ -14,31 +13,14 @@ import java.io.Serializable;
 @Getter
 @Setter
 @Entity("tb_user")
-public class User extends Base implements Serializable {
+@JoinTable(slaveTableName = "tb_role", masterTableField = "roleId", slaveTableJoinColumn = "role_id", joinType = JoinType.LEFT)
+public class User implements Serializable {
     @PrimaryKey(strategyKey = KeyStrategyManager.JDBC_AUTO, convertor = IntegerConvertor.class)
     private int userId;
-    /**
-     * 不排除这个数据库中没有的字段将报错。
-     */
-    @Column(isExclusion = true)
-    private Object voidColumn;
-    private String loginName;
+    private String loginname;
     private String password;
-    public User() {
-    }
-    public User(int userId, String loginName, String password) {
-        this.userId = userId;
-        this.loginName = loginName;
-        this.password = password;
-    }
-
-    @Override
-    public String toString() {
-        return "User{" +
-                "userId=" + userId +
-                ", loginName=" + getLoginName() +
-                ", password=" + getPassword() +
-                '}';
-    }
+    private int roleId;
+    @SlaveField(slaveTableName = "tb_role")//标记为从表字段
+    private String roleName;
 }
 

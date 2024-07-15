@@ -2,7 +2,7 @@ package com.example.demo.po;
 
 import com.maxwellnie.velox.sql.core.annotation.Entity;
 import com.maxwellnie.velox.sql.core.annotation.PrimaryKey;
-import com.maxwellnie.velox.sql.core.manager.KeyStrategyManager;
+import com.maxwellnie.velox.sql.core.natives.jdbc.table.primary.KeyStrategyManager;
 import lombok.Getter;
 import lombok.Setter;
 

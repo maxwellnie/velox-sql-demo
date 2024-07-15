@@ -3,6 +3,7 @@ package com.example.demo;
 import com.maxwellnie.velox.sql.spring.boot.DaoImplConf;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 @SpringBootApplication()
 @DaoImplConf(value = "com.example.demo.po")
